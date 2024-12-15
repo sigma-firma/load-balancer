@@ -6,8 +6,8 @@ type region struct {
 	NextClosest *region
 }
 
-// requestRegions could be requests from a region, or a region which hosts a
-// servers which handle the requests.
+// requestRegions could be requests from a region, or a region hosting a
+// server which handles incoming requests.
 var requestRegions []*region = []*region{
 	{"US", &region{}}, {"EU", &region{}}, {"CH", &region{}}, {"PH", &region{}},
 	{"JP", &region{}}, {"AR", &region{}}, {"CA", &region{}}, {"IS", &region{}},
