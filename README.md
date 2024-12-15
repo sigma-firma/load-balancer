@@ -3,4 +3,4 @@
 lb is a go application designed to simulate a load balancer
 
 
-![Untitled drawing (7)](https://github.com/user-attachments/assets/aaa0d109-9634-4dc4-8a47-43672053bbf0)
+[Screen Recording 2024-12-15 at 1.17.24 AM.webm](https://github.com/user-attachments/assets/1a55d4b6-9e38-4254-984e-cd903dc110ad)
