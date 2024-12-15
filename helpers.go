@@ -10,9 +10,9 @@ import (
 // reSelect is a recursive function which attempts to send a request to a
 // reqion, defaulting to the region.NextClosest when the initial reqion has
 // reached capacity
-func reSelect(l *reqion) {
+func reSelect(l *region) {
 	select {
-	case activeRegions[l] <- &reqion{mkID(15), l}:
+	case activeRegions[l] <- &region{mkID(15), l}:
 	default:
 		reSelect(l.NextClosest)
 	}
@@ -34,7 +34,7 @@ func perMs(per time.Duration) *time.Ticker {
 
 // display is used for visualizing the load balancing process via terminal
 // output
-func display(srvs map[*reqion]chan *reqion) {
+func display(srvs map[*region]chan *region) {
 	for i := 0; i <= 100; i++ {
 		// clear the terminal
 		fmt.Println()

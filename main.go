@@ -17,7 +17,7 @@ func main() {
 			// which handles requests for that region, creating a
 			// new activeRegion
 			if _, ok := activeRegions[l]; !ok {
-				activeRegions[l] = make(chan *reqion, 9)
+				activeRegions[l] = make(chan *region, 9)
 			}
 			// We send the request to the region/server, if the
 			// server connections pool is at capacity, reSelect()
