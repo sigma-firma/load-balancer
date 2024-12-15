@@ -5,21 +5,21 @@ import (
 )
 
 func main() {
-	requests := perMs(15) // incoming requests per millisecond
+	requests := perMs(13) // incoming requests per millisecond
 	resTime := perMs(200) // millisecond avg response time
 	quit := make(chan struct{})
 	for {
 		select {
 		case <-requests.C: // create each request
-			// pick a random reqion
+			// pick a random region
 			l := requestRegions[rand.Intn(len(requestRegions))]
 			// if the region has no connections, we open a channel
-			// which handles requests for that reqion, creating a
+			// which handles requests for that region, creating a
 			// new activeRegion
 			if _, ok := activeRegions[l]; !ok {
 				activeRegions[l] = make(chan *reqion, 9)
 			}
-			// We send the request to the reqion/server, if the
+			// We send the request to the region/server, if the
 			// server connections pool is at capacity, reSelect()
 			// recursively tries the region.NextClosest reqion.
 			// see: reSelect()
