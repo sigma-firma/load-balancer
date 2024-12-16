@@ -23,7 +23,7 @@ func main() {
 			}
 			// We send the request to the region/server, if the
 			// server connections pool is at capacity, reSelect()
-			// recursively tries the region.NextClosest reqion.
+			// recursively tries the region.NextClosest region.
 			// see: reSelect()
 			reSelect(l)
 			// terminal output
@@ -34,7 +34,7 @@ func main() {
 				totalConns = totalConns - 1
 				if len(r) == 0 {
 					// if all requests have been handled we
-					// delete the reqion from activeRegions
+					// delete the region from activeRegions
 					delete(activeRegions, l)
 				}
 			}
