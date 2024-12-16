@@ -1,6 +1,6 @@
 # load-balancer (lb)
 
-lb is a go application designed to simulate a load balancer
+lb is an MIT licensed application designed to simulate a load balancer
 
     ./lb --regions=16 --req_rate=13 --res_rate=200 --max_conns=9
 
