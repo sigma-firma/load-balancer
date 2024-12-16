@@ -40,6 +40,7 @@ func main() {
 			}
 		case <-quit:
 			requests.Stop()
+			resTime.Stop()
 			return
 		}
 	}
