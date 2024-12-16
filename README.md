@@ -2,7 +2,7 @@
 
 lb is a go application designed to simulate a load balancer
 
-region -> region
+    ./lb --regions=16 --req_rate=13 --res_rate=200 --max_conns=9
 
 
-[Screen Recording 2024-12-15 at 1.53.31 AM.webm](https://github.com/user-attachments/assets/062c9536-9ddd-4320-9441-95ff4e79d1c1)
+[c.webm](https://github.com/user-attachments/assets/b8791e98-10c3-410d-8ffb-ddd9b6cda062)

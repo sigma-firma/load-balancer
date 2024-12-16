@@ -50,6 +50,7 @@ func display(srvs map[*region]chan *region) {
 	fmt.Println("->Connections:\t", totalConns, "/", count*maxConns)
 	fmt.Println("->Requests/ms:\t", request_rate)
 	fmt.Println("->Responses/ms:\t", response_rate)
+	fmt.Println("->Uptime:\t", time.Since(start))
 	fmt.Println()
 
 	for _, loc := range regions {
@@ -61,6 +62,6 @@ func display(srvs map[*region]chan *region) {
 		// print ID and connection count
 		fmt.Println(loc.LocationID, "|", len(srvs[loc]), "|", vlen)
 	}
-
-	fmt.Println(time.Since(start))
+	fmt.Println()
+	fmt.Println()
 }
