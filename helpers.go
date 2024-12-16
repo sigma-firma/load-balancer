@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"golang.org/x/exp/rand"
@@ -13,6 +14,10 @@ import (
 func reSelect(l *region) {
 	select {
 	case activeRegions[l] <- &region{mkID(15), l}:
+		totalConns = totalConns + 1
+		if totalConns >= maxConns*count {
+			os.Exit(0)
+		}
 	default:
 		reSelect(l.NextClosest)
 	}
@@ -35,15 +40,27 @@ func perMs(per time.Duration) *time.Ticker {
 // display is used for visualizing the load balancing process via terminal
 // output
 func display(srvs map[*region]chan *region) {
-	for i := 0; i <= 100; i++ {
-		// clear the terminal
-		fmt.Println()
+	// clear the terminal
+	for i := 0; i <= 10; i++ {
+		fmt.Print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 	}
-	for _, loc := range requestRegions {
+
+	// print variables
+	fmt.Println("->Regions:\t", count)
+	fmt.Println("->Connections:\t", totalConns, "/", count*maxConns)
+	fmt.Println("->Requests/ms:\t", request_rate)
+	fmt.Println("->Responses/ms:\t", response_rate)
+	fmt.Println()
+
+	for _, loc := range regions {
+		// visualize connection count/dispersement
 		vlen := ""
 		for i := 0; i <= len(srvs[loc]); i++ {
 			vlen = vlen + "="
 		}
-		fmt.Println(loc.LocationID, len(srvs[loc]), "\t", vlen)
+		// print ID and connection count
+		fmt.Println(loc.LocationID, "|", len(srvs[loc]), "|", vlen)
 	}
+
+	fmt.Println(time.Since(start))
 }
