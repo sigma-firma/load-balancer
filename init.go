@@ -37,7 +37,7 @@ func init() {
 
 	regions = mkRegions(count)
 	for i, r := range regions {
-		if i+1 >= len(regions) {
+		if i+1 == len(regions) {
 			r.NextClosest = regions[0]
 			return
 		}
