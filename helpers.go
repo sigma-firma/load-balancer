@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -15,7 +16,8 @@ func reSelect(l *region) {
 	select {
 	case activeRegions[l] <- &region{mkID(15), l}:
 		totalConns = totalConns + 1
-		if totalConns >= maxConns*count {
+		if totalConns >= (maxConns * count) {
+			log.Println(totalConns)
 			os.Exit(0)
 		}
 	default:
@@ -46,11 +48,15 @@ func display(srvs map[*region]chan *region) {
 	}
 
 	// print variables
-	fmt.Println("->Regions:\t", count)
-	fmt.Println("->Connections:\t", totalConns, "/", count*maxConns)
-	fmt.Println("->Requests/ms:\t", request_rate)
-	fmt.Println("->Responses/ms:\t", response_rate)
-	fmt.Println("->Uptime:\t", time.Since(start))
+	fmt.Println(" ❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚")
+	fmt.Println()
+	fmt.Println("   •  Regions        ->  ", count)
+	fmt.Println("   •  Connections    ->  ", totalConns, "/", count*maxConns)
+	fmt.Printf("   •  Requests/ms    ->   %d/ms\n", request_rate)
+	fmt.Printf("   •  ResponseTime   ->   %dms\n", response_time)
+	fmt.Println("   •  Uptime         ->  ", time.Since(start))
+	fmt.Println()
+	fmt.Println(" ❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚")
 	fmt.Println()
 
 	for _, loc := range regions {
@@ -60,8 +66,10 @@ func display(srvs map[*region]chan *region) {
 			vlen = vlen + "="
 		}
 		// print ID and connection count
-		fmt.Println(loc.LocationID, "|", len(srvs[loc]), "|", vlen)
+		fmt.Println("  -> ", loc.LocationID, " |", len(srvs[loc]), "| ", vlen+">")
 	}
+	fmt.Println()
+	fmt.Println(" ❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚")
 	fmt.Println()
 	fmt.Println()
 }

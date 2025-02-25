@@ -5,4 +5,4 @@
     ./lb --regions=16 --req_rate=13 --res_rate=200 --max_conns=9
 
 
-[c.webm](https://github.com/user-attachments/assets/b8791e98-10c3-410d-8ffb-ddd9b6cda062)
+[Screen Recording 2025-02-24 at 7.59.22 PM.webm](https://github.com/user-attachments/assets/b0ebaf5f-bcf9-4105-90e8-4175ede5bd6f)

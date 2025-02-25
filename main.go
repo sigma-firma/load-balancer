@@ -7,12 +7,16 @@ import (
 )
 
 func main() {
-	requests := perMs(time.Duration(request_rate)) // incoming requests per millisecond
-	resTime := perMs(time.Duration(response_rate)) // millisecond avg response time
-	quit := make(chan struct{})
+	var (
+		// incoming requests per millisecond
+		requests *time.Ticker = perMs(time.Duration(request_rate))
+		// millisecond avg response time
+		resTime *time.Ticker  = perMs(time.Duration(response_time))
+		quit    chan struct{} = make(chan struct{})
+	)
 	for {
 		select {
-		case <-requests.C: // create each request
+		case <-requests.C: // on each request
 			// pick a random region
 			l := regions[rand.Intn(len(regions))]
 			// if the region has no connections, we open a channel
@@ -26,9 +30,8 @@ func main() {
 			// recursively tries the region.NextClosest region.
 			// see: reSelect()
 			reSelect(l)
-			// terminal output
-			display(activeRegions)
-		case <-resTime.C: // handle each request
+			display(activeRegions) // terminal output
+		case <-resTime.C: // request response
 			for l, r := range activeRegions {
 				<-r
 				totalConns = totalConns - 1

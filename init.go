@@ -22,7 +22,7 @@ var activeRegions = make(map[*region]chan *region)
 var totalConns int
 var count int
 var request_rate int
-var response_rate int
+var response_time int
 var maxConns int
 var start time.Time = time.Now()
 
@@ -31,7 +31,7 @@ var start time.Time = time.Now()
 func init() {
 	flag.IntVar(&count, "regions", 1234, "The number of clusters to create")
 	flag.IntVar(&request_rate, "req_rate", 1234, "Sends a request once every (x) milliseconds")
-	flag.IntVar(&response_rate, "res_rate", 1234, "Sends a response once every (x) milliseconds")
+	flag.IntVar(&response_time, "res_rate", 1234, "Sends a response once every (x) milliseconds")
 	flag.IntVar(&maxConns, "max_conns", 1234, "Max connections per node")
 	flag.Parse()
 
