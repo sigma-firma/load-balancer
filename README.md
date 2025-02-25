@@ -1,20 +1,19 @@
 # load-balancer (lb)
 
-`lb` is an MIT licensed application designed to simulate a load balancer
-
-
-    ./lb --regions=16 --req_rate=13 --res_rate=200 --max_conns=9
-
+`lb` is an MIT licensed application written in `go` designed to simulate a load balancer
 
 [Screen Recording 2025-02-24 at 7.59.22 PM.webm](https://github.com/user-attachments/assets/b0ebaf5f-bcf9-4105-90e8-4175ede5bd6f)
 
-This program acts a model load balancer, accepting incoming "requests"
-at a rate moderated using the channel provided via the `go` `*time.Ticker` type
-(`<-&t.T{}.C`) and responding to those requests using the same approach.
+This program acts a model "load balancer", accepting incoming "requests"
+at a rate moderated via the channel provided via the `go` `*time.Ticker` type
+(`<-&t.T{}.C`) and responding to those requests via the same approach.
 As requests come in, the number of open connections are balanced determined
 accordingly via the request rate flag (`--req_rate`) and response time flag
 (`--res_rate`), over a number of servers in different (metaphorical) 
-regions (`--regions`), starting with the next "closest" server.
+regions (`--regions`), starting with the next "closest" server. Each servers 
+maximum number of connections is set via the max conns flag (`--max_conns`), 
+thus the max cluster connections can be determined via the number of regions
+multiplied by the max conns. 
 
 To run the program we use a command like this:
 
